@@ -1,0 +1,27 @@
+Game Idea:
+    - Based on the name "Contrast", you have different colored lights you can turn on. The level changes depending on which light is on.
+        - Blue Light show blue Objects, Red Light show red, etc
+
+Player Power:
+    - Force Field to Push Objects
+    - Grab Boxes to Push/Pull
+        Check how far away from the nearest box, then if that distance is small, show grab
+
+Enviroment Hazards:
+    Earth:
+        - Crushing Platforms
+        - Quicksand
+
+    Air:
+        - Air Currents that moves Platforms/Players
+
+    Fire:
+        - Fireballs
+        - Lava
+
+
+
+Colors:
+    Coins:
+        Orange: FB844B
+        Blue: 2DC8D8
