@@ -2,15 +2,10 @@
 
 public class PlayerBase : MonoBehaviour
 {
-    [SerializeField] Animator _anim;
     [SerializeField] private ParticleSystem[] _dustPS;
-
-    // Grab Variables
     [System.NonSerialized] public Transform _grabObject;
 
-    public void CreateDust() { 
-        foreach (ParticleSystem _dust in _dustPS) { _dust.Play(); }
-    }
+    public void CreateDust() { foreach (ParticleSystem _dust in _dustPS) { _dust.Play(); } }
 
     public float Normalize(float num) {
         num = Mathf.Round(num * 100);
@@ -21,11 +16,6 @@ public class PlayerBase : MonoBehaviour
     }
     
     // Check if in range to grab Box
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "BoxCollider") { _grabObject = other.transform.parent.transform; }
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.tag == "BoxCollider") { _grabObject = null; }
-    }
+    private void OnTriggerEnter2D(Collider2D other) { if (other.gameObject.tag == "BoxCollider") { _grabObject = other.transform.parent.transform; } }
+    private void OnTriggerExit2D(Collider2D other) { if (other.gameObject.tag == "BoxCollider") { _grabObject = null; } }
 }
