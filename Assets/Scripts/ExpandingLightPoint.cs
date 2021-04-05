@@ -8,26 +8,25 @@ public class ExpandingLightPoint : MonoBehaviour
     [SerializeField] Color _childColor;
 
     // Child Variables
-    SpriteRenderer _coin;
-    Light2D _coinLight;
+    SpriteRenderer _egg;
+    Light2D _eggLight;
 
     // Expanding Light Variables
-    bool _coinCollected = false;
+    bool _eggCollected = false;
     [SerializeField] float _maxRadius = 40f;
 
     private void Awake() {
         // Get Compononent
-        _coin = transform.Find("Coin").GetComponent<SpriteRenderer>();
-        _coinLight = _coin.transform.Find("Glow").GetComponent<Light2D>();
+        _egg = transform.Find("Coin").GetComponent<SpriteRenderer>();
+        _eggLight = _egg.transform.Find("Glow").GetComponent<Light2D>();
 
         _light.color = _lightColor; 
-        _coin.color = _childColor;
-        _coinLight.color = _childColor;
+        _eggLight.color = _childColor;
     }
 
     // Update is called once per frame
     void Update() {
-        if (_coinCollected) {
+        if (_eggCollected) {
             if (_light.pointLightOuterRadius < _maxRadius) {
                 float _changeSpeed = 0.1f;
                 _light.pointLightOuterRadius += _changeSpeed;
@@ -38,7 +37,7 @@ public class ExpandingLightPoint : MonoBehaviour
 
     public void ShowLight() {
         _light.enabled = true;
-        _coinCollected = true;
+        _eggCollected = true;
         
     }
 }
