@@ -11,6 +11,10 @@ public class PlayerMove : StateMachineBehaviour
     private float _horizontalMove = 0f;
     private bool _jump = false;
 
+    // Idle Timer
+    private float idleTimer;
+    private float idleTimerMax = 2.0f;
+
     // Access Controller
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         controller = animator.GetComponent<CharacterController2D>();
@@ -28,14 +32,24 @@ public class PlayerMove : StateMachineBehaviour
         // Check Input Keys
         _horizontalMove = Input.GetAxisRaw("Horizontal") * _runSpeed;
         if (Input.GetButtonDown("Jump")) { _jump = true; }
+        IdleReset(animator);
        
         // Move and Reset Jump
         controller.Move(_horizontalMove * Time.fixedDeltaTime, _jump, true);
         _jump = false;
+
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) {
         animator.ResetTrigger("DashKey");
+    }
+
+    private void IdleReset(Animator anim) {
+        if (_horizontalMove != 0) { idleTimer = 0; return; }
+        
+        Debug.Log(idleTimer);
+        if (idleTimer < idleTimerMax) { idleTimer += Time.fixedDeltaTime; }
+        else { anim.SetBool("Idle", true); }
     }
 
 }
