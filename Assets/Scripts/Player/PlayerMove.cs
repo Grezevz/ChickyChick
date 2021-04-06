@@ -34,15 +34,14 @@ public class PlayerMove : StateMachineBehaviour
 
         // Move and Reset Jump
         controller.Move(_horizontalMove * Time.fixedDeltaTime, _jump, true);
+        if (_jump) { animator.SetBool("Jump", true); }
         _jump = false;
-
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) => animator.ResetTrigger("DashKey");
 
     private void IdleReset(Animator anim) {
-        if (rigidbody.velocity != Vector2.zero) { return; }
+        if (Mathf.Abs(rigidbody.velocity.x) > 0.1f && !_jump) { return; }
         anim.SetBool("Idle", true);
     }
-
 }

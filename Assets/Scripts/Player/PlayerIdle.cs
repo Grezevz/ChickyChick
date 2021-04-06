@@ -8,8 +8,10 @@ public class PlayerIdle : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) => controller = animator.GetComponent<CharacterController2D>();
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        bool moveCheck = Input.GetButtonDown("Jump") || Input.GetAxisRaw("Horizontal") != 0;
+        bool _jump = Input.GetButtonDown("Jump");
+        bool moveCheck = _jump || Input.GetAxisRaw("Horizontal") != 0;
         if (moveCheck) { animator.SetBool("Idle", false); }
-        controller.Move(0, Input.GetButtonDown("Jump"), false);
+        controller.Move(0, _jump, false);
+        if (_jump) { animator.SetBool("Jump", true); }
     }
 }

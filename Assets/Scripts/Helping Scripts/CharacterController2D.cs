@@ -83,7 +83,7 @@ public class CharacterController2D : MonoBehaviour
 		}
 
 		// If the player should jump...
-		SquashStretch(jump);
+		// SquashStretch(jump);
 		if (m_Grounded && jump) {
 			// Add a vertical force to the player.
 			m_Grounded = false;

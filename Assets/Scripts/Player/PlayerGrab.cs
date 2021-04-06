@@ -3,7 +3,7 @@
 public class PlayerGrab : StateMachineBehaviour
 {   
     private CharacterController2D controller;
-    private PlayerBase pb;
+    private PlayerBase playerbase;
 
     // Movement
     [SerializeField] private float runSpeed = 25f;
@@ -17,8 +17,8 @@ public class PlayerGrab : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         controller = animator.GetComponent<CharacterController2D>();
-        pb = animator.GetComponent<PlayerBase>();
-        box = pb._grabObject;
+        playerbase = animator.GetComponent<PlayerBase>();
+        box = playerbase._grabObject;
 
         // Reset Check
         if (box == null) { animator.SetBool("GrabKey", false); return; }
@@ -34,7 +34,7 @@ public class PlayerGrab : StateMachineBehaviour
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { 
-        box = pb._grabObject;
+        box = playerbase._grabObject;
         if (Input.GetButtonUp("Grab") || box == null) { animator.SetBool("GrabKey", false); }
 
         // Get and Set Position
