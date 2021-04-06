@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Jumping
+  m_Name: Player_Land
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,16 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 4546079505270775977, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786,
-        type: 3}
-    - time: 0.1
-      value: {fileID: 8775540289232251632, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786,
+      value: {fileID: 7170301242452564903, guid: ed51518817449a945a01394eb0add8a7,
         type: 3}
     - time: 0.16666667
-      value: {fileID: -2056076197188280650, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786,
-        type: 3}
-    - time: 0.26666668
-      value: {fileID: -1539846638408354222, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786,
+      value: {fileID: 7170301242452564903, guid: ed51518817449a945a01394eb0add8a7,
         type: 3}
     attribute: m_Sprite
     path: PlayerSprite
@@ -50,16 +44,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 4546079505270775977, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786, type: 3}
-    - {fileID: 8775540289232251632, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786, type: 3}
-    - {fileID: -2056076197188280650, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786, type: 3}
-    - {fileID: -1539846638408354222, guid: 1cb5ecf6fc7cf1a49ac5701f1f35c786, type: 3}
+    - {fileID: 7170301242452564903, guid: ed51518817449a945a01394eb0add8a7, type: 3}
+    - {fileID: 7170301242452564903, guid: ed51518817449a945a01394eb0add8a7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.28333336
+    m_StopTime: 0.18333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -78,4 +70,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.18333334
+    functionName: AnimationFinishedTrigger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
