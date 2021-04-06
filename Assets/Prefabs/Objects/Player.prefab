@@ -4855,8 +4855,8 @@ GameObject:
   - component: {fileID: 3865463630578562333}
   - component: {fileID: 3865463630578562332}
   - component: {fileID: 3865463630578562329}
-  - component: {fileID: 3865463630578562328}
   - component: {fileID: 3865463630578562330}
+  - component: {fileID: 896055272001411732}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4952,20 +4952,6 @@ MonoBehaviour:
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3865463630578562328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3865463630578562323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6bc5c77cd4c5d545a716218d0ae7596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dustPS:
-  - {fileID: 1124240249169329440}
 --- !u!95 &3865463630578562330
 Animator:
   serializedVersion: 3
@@ -4985,6 +4971,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &896055272001411732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865463630578562323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bc5c77cd4c5d545a716218d0ae7596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dustPS:
+  - {fileID: 1124240249169329440}
 --- !u!1 &3865463631012826533
 GameObject:
   m_ObjectHideFlags: 0
@@ -5141,7 +5141,7 @@ MonoBehaviour:
   - {x: -0.24999882, y: 0.09372332, z: 0}
   m_ShapePathHash: -45033804
   m_Mesh: {fileID: 0}
-  m_InstanceId: 23672
+  m_InstanceId: 18542
 --- !u!1 &3865463631561824271
 GameObject:
   m_ObjectHideFlags: 0

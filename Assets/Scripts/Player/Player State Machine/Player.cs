@@ -2,22 +2,27 @@
 
 public class Player : MonoBehaviour
 {
-    // State Variables
+    #region State Variables
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
+    [SerializeField] private PlayerData playerData;
+    #endregion
 
-    // Accessors
+    #region Components
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
+    #endregion
 
-    // Variables
+    #region Other Variables
     public Vector2 CurrentVelocity { get; private set; }
     public int FacingDirection { get; private set; }
-    [SerializeField] private PlayerData playerData;
+ 
     private Vector2 workspace;
+    #endregion
 
+    #region Unity Callback Functions
     private void Awake() {
         StateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -42,19 +47,29 @@ public class Player : MonoBehaviour
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
     }
+    #endregion
 
+    #region Set Functions
     public void SetVelocityX(float velocity) {
+        // workspace = Vector2.SmoothDamp(CurrentVelocity, new Vector2(velocity, CurrentVelocity.y), ref m_Velocity, 0.05f);
         workspace.Set(velocity, CurrentVelocity.y);
         RB.velocity = workspace;
         CurrentVelocity = workspace;
     }
+    #endregion
 
+    #region Check Functions
     public void CheckIfShouldFlip(int xInput) {
         if (xInput != 0 && xInput != FacingDirection) { Flip(); }
     }
+    
+    #endregion
 
+    #region Other Fuctions
     private void Flip() {
         FacingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+
+    #endregion
 }
