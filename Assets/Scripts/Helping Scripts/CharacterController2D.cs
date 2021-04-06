@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
-	public float m_JumpForce = 400f;							// Amount of force added when the player jumps.
-	[SerializeField] private float _rotation = 10f;				// Rotation Value when Moving
+	public float m_JumpForce = 900f;							// Amount of force added when the player jumps.
+	[SerializeField] private float _rotation = 3f;				// Rotation Value when Moving
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
@@ -17,7 +17,6 @@ public class CharacterController2D : MonoBehaviour
 
 	private Rigidbody2D m_Rigidbody2D;
 	private Transform m_Transform;
-	private PlayerBase m_PlayerBase;
 	private GameObject m_PlayerSprite;
 
 
@@ -32,13 +31,12 @@ public class CharacterController2D : MonoBehaviour
 		// Get Components
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		m_Transform = GetComponent<Transform>();
-		m_PlayerBase = GetComponent<PlayerBase>();
 		m_PlayerSprite = m_Transform.GetChild(0).gameObject;
 
 		// Set Variables
 		_startScale = m_PlayerSprite.transform.localScale;
 		m_Direction = Mathf.Sign(m_Transform.localScale.x);
-        _direction = m_PlayerBase.Normalize(transform.position.x - _previousPos);
+        _direction = Normalize(transform.position.x - _previousPos);
 		_previousPos = m_Transform.position.x;
 
 		if (OnLandEvent == null) { OnLandEvent = new UnityEvent(); }
@@ -57,7 +55,7 @@ public class CharacterController2D : MonoBehaviour
 				m_Grounded = true;
 				if (!wasGrounded) {
 						OnLandEvent.Invoke();
-						m_PlayerBase.CreateDust();	
+						// m_PlayerBase.CreateDust();	
 				}
 			}
 		}
@@ -78,7 +76,7 @@ public class CharacterController2D : MonoBehaviour
 			}
 
 			// Move Rotation
-			Rotate(m_PlayerBase.Normalize(m_Transform.position.x - _previousPos));
+			Rotate(Normalize(m_Transform.position.x - _previousPos));
 			_previousPos = m_Transform.position.x;
 		}
 
@@ -161,4 +159,12 @@ public class CharacterController2D : MonoBehaviour
         } else { bounceTimer++; }
     }
 	
+	private float Normalize(float num) {
+        num = Mathf.Round(num * 100);
+
+        if (num > 0) { return (num / num); }
+        if (num < 0) { return -1*(num / num); }
+        return 0;
+    }
+
 }
