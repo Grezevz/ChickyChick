@@ -7,6 +7,7 @@
     {
         base.Enter();
 
+        player.JumpSquash();
         player.SetVelocityY(playerData.jumpVelocity);
         isAbilityDone = true;
     }
