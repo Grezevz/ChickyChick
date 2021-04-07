@@ -6,6 +6,11 @@ public class PlayerData : ScriptableObject
     [Header("Move State")]
     public float movementVelocity = 60;
 
+    [Header("Grab State")]
+    public float grabMovementVelocity = 30;
+    public float grabDistance = 10f;
+    public float grabDistanceRelease = 20f;
+
     [Header("Jump State")]
     public float jumpVelocity = 15;
     public int amountOfJumps = 1;

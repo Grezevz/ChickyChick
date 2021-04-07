@@ -11,7 +11,6 @@ public class PlayerGrab : StateMachineBehaviour
 
     // Objects and Size
     private Transform box;
-
     private float width;
     private float direction;
 
@@ -20,11 +19,11 @@ public class PlayerGrab : StateMachineBehaviour
         playerbase = animator.GetComponent<PlayerBase>();
         box = playerbase._grabObject;
 
-        // Reset Check
-        if (box == null) { animator.SetBool("GrabKey", false); return; }
-        float posCheck = Mathf.Sign(box.position.x - animator.transform.position.x); 
-        float scaleCheck = Mathf.Sign(animator.transform.localScale.x);
-        if (posCheck != scaleCheck) { animator.SetBool("GrabKey", false); }
+        // Direction Check
+        // if (box == null) { animator.SetBool("GrabKey", false); return; }
+        // float posCheck = Mathf.Sign(box.position.x - animator.transform.position.x); 
+        // float scaleCheck = Mathf.Sign(animator.transform.localScale.x);
+        // if (posCheck != scaleCheck) { animator.SetBool("GrabKey", false); }
 
         // Sprite Size and Direction
         float boxSize = box.GetComponent<SpriteRenderer>().bounds.size.x;

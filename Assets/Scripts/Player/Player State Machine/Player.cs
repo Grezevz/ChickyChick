@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
+    public PlayerGrabState GrabState { get; private set; }
     [SerializeField] private PlayerData playerData;
     #endregion
 
@@ -22,11 +23,13 @@ public class Player : MonoBehaviour
 
     #region Check Transforms
     [SerializeField] private Transform groundCheck;
-
+    [SerializeField] private Transform[] boxCheck;
     #endregion
 
     #region Other Variables
     public Vector2 CurrentVelocity { get; private set; }
+    public Transform ClosestBox { get; private set; }
+    public float ClosestBoxDistance { get; private set; }
     public int FacingDirection { get; private set; }
     private int rotatingID, bounceX, bounceY;
     private Vector2 workspace;
@@ -40,6 +43,8 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
+        GrabState = new PlayerGrabState(this, StateMachine, playerData, "grab");
+
     }
 
     private void Start() {
@@ -102,12 +107,11 @@ public class Player : MonoBehaviour
     }
 
     public void JumpSquash() {
-        CancelSquash();
-
+        float squashAmount = 0.20f;
         Vector2 currentScale = SpriteObject.transform.localScale;
 
-        // Squash and Stretch
-        float squashAmount = 0.20f;
+        CancelSquash();
+
         bounceX = LeanTween.scaleX(SpriteObject, currentScale.x + squashAmount, 0.1f).setEaseInOutBounce().id;
         bounceY = LeanTween.scaleY(SpriteObject, currentScale.y - (squashAmount/3), 0.1f).setEaseInOutBounce().id;
 
@@ -130,6 +134,26 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Other Fuctions
+
+    public void FindClosestBox() {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (Transform p in boxCheck) {
+            Vector2 directionToTarget = p.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr) {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = p;
+            }
+        }
+        ClosestBox = bestTarget;
+        ClosestBoxDistance = closestDistanceSqr;
+    }
+
+    public void DistanceToBox() {
+        ClosestBoxDistance = (ClosestBox.position - transform.position).sqrMagnitude;
+    }
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishedTrigger() => StateMachine.CurrentState.AnimationFinishedTrigger();
     #endregion

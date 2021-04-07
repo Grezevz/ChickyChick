@@ -1,6 +1,9 @@
 ﻿public class PlayerGroundedState : PlayerState
 {
     protected int xInput;
+    protected bool GrabInput;
+    protected bool GrabDistance;
+    protected bool GrabDistanceRelease;
     private bool JumpInput;
     private bool isGrounded;
     
@@ -35,6 +38,7 @@
 
         xInput = player.InputHandler.NormInputX;
         JumpInput = player.InputHandler.JumpInput;
+        GrabInput = player.InputHandler.GrabInput;
 
         if (JumpInput && player.JumpState.CanJump()) { 
             player.InputHandler.UseJumpInput();
@@ -42,6 +46,10 @@
         } else if (!isGrounded) { 
             player.InAirState.StartCoyoteTime();
             stateMachine.ChangeState(player.InAirState); 
+        } else if (GrabInput) {
+            player.FindClosestBox();
+            GrabDistance = player.ClosestBoxDistance < playerData.grabDistance;
+            if (GrabDistance) { stateMachine.ChangeState(player.GrabState); }
         }
     }
 
