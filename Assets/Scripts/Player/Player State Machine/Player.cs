@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         Vector2 currentScale = SpriteObject.transform.localScale;
 
         // Squash and Stretch
-        float squashAmount = 0.30f;
+        float squashAmount = 0.20f;
         bounceX = LeanTween.scaleX(SpriteObject, currentScale.x + squashAmount, 0.1f).setEaseInOutBounce().id;
         bounceY = LeanTween.scaleY(SpriteObject, currentScale.y - (squashAmount/3), 0.1f).setEaseInOutBounce().id;
 
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
     }
 
     private IEnumerator JumpStretch(Vector2 scale) {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.2f);
 
         CancelSquash();
         

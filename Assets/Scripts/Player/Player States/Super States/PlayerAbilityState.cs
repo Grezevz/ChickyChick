@@ -3,10 +3,7 @@
     protected bool isAbilityDone;
     private bool isGrounded;
 
-    public PlayerAbilityState(Player _player, PlayerStateMachine _stateMachine, PlayerData _playerData, string _animBoolName) : base(_player, _stateMachine, _playerData, _animBoolName)
-    {
-        
-    }
+    public PlayerAbilityState(Player _player, PlayerStateMachine _stateMachine, PlayerData _playerData, string _animBoolName) : base(_player, _stateMachine, _playerData, _animBoolName) {}
 
     public override void DoChecks()
     {
