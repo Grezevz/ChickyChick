@@ -2,16 +2,18 @@
 
 public class PlayerInAirState : PlayerState
 {
+    // Input
     private int xInput;
-    private bool isGrounded;
-    private bool isJumping;
     private bool jumpInput;
     private bool jumpInputStop;
+    private bool dashInput;
+    
+    // Checks
+    private bool isGrounded;
+    private bool isJumping;
     private bool coyoteTime;
 
-    public PlayerInAirState(Player _player, PlayerStateMachine _stateMachine, PlayerData _playerData, string _animBoolName) : base(_player, _stateMachine, _playerData, _animBoolName) {
-        
-    }
+    public PlayerInAirState(Player _player, PlayerStateMachine _stateMachine, PlayerData _playerData, string _animBoolName) : base(_player, _stateMachine, _playerData, _animBoolName) {}
 
     public override void DoChecks()
     {
@@ -39,11 +41,13 @@ public class PlayerInAirState : PlayerState
         xInput = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
         jumpInputStop = player.InputHandler.JumpInputStop;
+        dashInput = player.InputHandler.DashInput;
 
         CheckJumpMultipler();
 
         if (isGrounded && player.CurrentVelocity.y < 0.01f) { stateMachine.ChangeState(player.LandState); return; }
         if (jumpInput && player.JumpState.CanJump()) { stateMachine.ChangeState(player.JumpState); return; }
+        if (dashInput && player.DashState.CheckIfCanDash()) { stateMachine.ChangeState(player.DashState); return; }
 
         player.CheckIfShouldFlip(xInput);
         player.SetVelocityX(playerData.movementVelocity * xInput);

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
     public PlayerGrabState GrabState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
     [SerializeField] private PlayerData playerData;
     #endregion
 
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public GameObject SpriteObject { get; private set; }
+    public Transform DashDirectionIndicator { get; private set; }
     #endregion
 
     #region Check Transforms
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
     public float ClosestBoxDistance { get; private set; }
     public int FacingDirection { get; private set; }
     private int rotatingID, bounceX, bounceY;
+    public float SpriteHeight { get; private set; }
     private Vector2 workspace;
     #endregion
 
@@ -44,16 +47,18 @@ public class Player : MonoBehaviour
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         GrabState = new PlayerGrabState(this, StateMachine, playerData, "grab");
-
+        DashState = new PlayerDashState(this, StateMachine, playerData, "inAir");
     }
 
     private void Start() {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
-        SpriteObject = transform.GetChild(0).gameObject;
+        SpriteObject = transform.Find("PlayerSprite").gameObject;
+        DashDirectionIndicator = transform.Find("DashDirectionIndicator").transform;
 
         FacingDirection = 1;
+        SpriteHeight = SpriteObject.GetComponent<SpriteRenderer>().bounds.size.y;
 
         StateMachine.Initialize(IdleState);
     }
@@ -70,8 +75,12 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Set Functions
+    public void SetVelocity(float velocity, Vector2 direction) {
+        workspace = direction * velocity;
+        RB.velocity = workspace;
+        CurrentVelocity = workspace;
+    }
     public void SetVelocityX(float velocity) {
-        // workspace = Vector2.SmoothDamp(CurrentVelocity, new Vector2(velocity, CurrentVelocity.y), ref m_Velocity, 0.05f);
         workspace.Set(velocity, CurrentVelocity.y);
         RB.velocity = workspace;
         CurrentVelocity = workspace;

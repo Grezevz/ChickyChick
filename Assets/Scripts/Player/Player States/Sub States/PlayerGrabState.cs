@@ -42,7 +42,7 @@ public class PlayerGrabState : PlayerGroundedState
 
     private void SetWidth() {
         float boxWidth = box.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        float spriteWidth = player.SpriteObject.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        float spriteWidth = player.SpriteHeight / 2;
         width = boxWidth + spriteWidth - 1.05f;
     }
 
