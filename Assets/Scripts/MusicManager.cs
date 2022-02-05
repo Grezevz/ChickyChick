@@ -12,9 +12,9 @@ public class MusicManager : MonoBehaviour
     }
 
     private void Update() {
-        if (!_audioManager.isPlaying(_songName)) {
-            if (_breakTimer < _maxBreak) { _breakTimer += Time.deltaTime; }
-            else { _audioManager.Play(_songName); _breakTimer = 0; }
-        }
+        if (_audioManager.isPlaying(_songName)) { return; }
+
+        if (_breakTimer < _maxBreak) { _breakTimer += Time.deltaTime; }
+        else { _audioManager.Play(_songName); _breakTimer = 0; }
     }
 }

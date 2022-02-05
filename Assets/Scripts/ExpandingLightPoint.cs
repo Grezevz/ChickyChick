@@ -26,18 +26,17 @@ public class ExpandingLightPoint : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (_eggCollected) {
-            if (_light.pointLightOuterRadius < _maxRadius) {
-                float _changeSpeed = 0.1f;
-                _light.pointLightOuterRadius += _changeSpeed;
-                _light.pointLightInnerRadius += _changeSpeed / 3;
-            }
-        }
+        if (!_eggCollected) { return; }
+        if (_light.pointLightOuterRadius >= _maxRadius) { return; }
+        
+        float _changeSpeed = 0.1f;
+        _light.pointLightOuterRadius += _changeSpeed;
+        _light.pointLightInnerRadius += _changeSpeed / 3;
+        
     }
 
     public void ShowLight() {
         _light.enabled = true;
         _eggCollected = true;
-        
     }
 }

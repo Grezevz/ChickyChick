@@ -17,12 +17,11 @@ public class CoinMovement : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.name == "Player") {
-            if (!isCollected) {
-                FindObjectOfType<AudioManager>().PlayOneShot("Energy");
-                CoinCollected();
-            }
-        }
+        if (other.gameObject.name != "Player") { return; }
+        if (isCollected) { return; }
+
+        FindObjectOfType<AudioManager>().PlayOneShot("Energy");
+        CoinCollected();
     }
 
     private void Update() {
