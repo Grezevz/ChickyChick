@@ -27,10 +27,10 @@
     {
         base.LogicUpdate();
 
-        if (isAbilityDone) {
-            if (isGrounded && player.CurrentVelocity.y < 0.01f) { stateMachine.ChangeState(player.IdleState); }
-            else { stateMachine.ChangeState(player.InAirState); }
-        }
+        if (!isAbilityDone) { return; }
+
+        if (isGrounded && player.CurrentVelocity.y < 0.01f) { stateMachine.ChangeState(player.IdleState); }
+        else { stateMachine.ChangeState(player.InAirState); }
     }
 
     public override void PhysicsUpdate()
