@@ -29,18 +29,18 @@ public class CoinMovement : MonoBehaviour
     }
 
     private void CoinCollected() {
-        if (!isCollected) {
-            isCollected = true;
-            _parent.ShowLight();
-            destination = new Vector2(target.position.x, target.position.y);
+        if (isCollected) { return; }
 
-            // Transform
-            LeanTween.moveX(transform.gameObject, destination.x, animationTime).setEaseInBack();
-            LeanTween.moveY(transform.gameObject, destination.y, animationTime).setEaseOutBack();
+        isCollected = true;
+        _parent.ShowLight();
+        destination = new Vector2(target.position.x, target.position.y);
 
-            // Scale and Rotate
-            LeanTween.scale(transform.gameObject, new Vector3(2.5f, 2.5f, 2.5f), animationTime).setEaseInQuart();
-            LeanTween.rotateZ(transform.gameObject, 2000, animationTime).setEaseInCubic();
-        }
+        // Transform
+        LeanTween.moveX(transform.gameObject, destination.x, animationTime).setEaseInBack();
+        LeanTween.moveY(transform.gameObject, destination.y, animationTime).setEaseOutBack();
+
+        // Scale and Rotate
+        LeanTween.scale(transform.gameObject, new Vector3(2.5f, 2.5f, 2.5f), animationTime).setEaseInQuart();
+        LeanTween.rotateZ(transform.gameObject, 2000, animationTime).setEaseInCubic();
     }
 }
