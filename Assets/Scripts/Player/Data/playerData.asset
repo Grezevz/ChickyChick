@@ -23,11 +23,11 @@ MonoBehaviour:
   dashCooldown: 0.5
   maxHoldTime: 1
   holdTimeScale: 0.5
-  dashTime: 0.2
-  dashVelocity: 30
+  dashTime: 0.15
+  dashVelocity: 45
   drag: 10
   dashEndYMultiplier: 0.2
-  distBetweenAfterImage: 0.5
+  distBetweenAfterImage: 1.5
   rotation: 7
   groundCheckRadius: 0.3
   whatIsGround:

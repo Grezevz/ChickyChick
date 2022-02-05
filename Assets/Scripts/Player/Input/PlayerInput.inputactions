@@ -191,15 +191,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "ebd82dcc-0d27-4dfe-b692-c20f27e73592",
-                    "path": "<Mouse>/position",
+                    "name": "Direction",
+                    "id": "1f0c5b84-0f41-4be7-bd93-2758601ae736",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DashDirection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "4200e5ee-a2ed-4157-a65e-1c07f537fda4",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "DashDirection",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "537a2d95-e28c-4e2e-8790-99c1e149f80b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "2ee59f31-42d4-41d3-a2cf-cffaf46d6ec4",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "8763cdb8-f4a8-4ac6-8c0a-25bafb740c8c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

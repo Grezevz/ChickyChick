@@ -76,7 +76,7 @@ public class PlayerInputHandler : MonoBehaviour
         RawDashDirectionInput = context.ReadValue<Vector2>();
         
         Vector3 pos = transform.position + new Vector3(0f, player.SpriteHeight/2);
-        RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - pos;
+        // RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - pos;
         DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
     }
 

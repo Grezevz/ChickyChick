@@ -21,16 +21,67 @@ public class PlayerDashState : PlayerAbilityState
         isHolding = true;
         dashDirection = Vector2.right * player.FacingDirection;
 
-        Time.timeScale = playerData.holdTimeScale;
-        startTime = Time.unscaledTime;
+        /* Use this block if want to use air dash
+        * Time.timeScale = playerData.holdTimeScale;
+        * startTime = Time.unscaledTime;
 
-        player.DashDirectionIndicator.gameObject.SetActive(true);
+        * player.DashDirectionIndicator.gameObject.SetActive(true);
+        */
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
+        DashFacingDirection();        
+    }
+    
+    private void CheckIfShouldPlaceAfterImage() {
+        if (Vector2.Distance(player.transform.position, lastAIPos) >= playerData.distBetweenAfterImage) {
+            PlaceAfterImage();
+        }
+    }
+
+    private void PlaceAfterImage() {
+        PlayerAfterImagePool.Instance.GetFromPool();
+        lastAIPos = player.transform.position;
+    }
+
+    public bool CheckIfCanDash() {
+        return CanDash && Time.time >= lastDashTime + playerData.dashCooldown;
+    }
+    
+    public void ResetCanDash() => CanDash = true;
+
+    private void DashFacingDirection() {
+        dashDirectionInput = new Vector2(player.FacingDirection, 0f);
+
+        if (dashDirectionInput != Vector2.zero) {
+            dashDirection = dashDirectionInput;
+            dashDirection.Normalize();
+        }
+
+        if (isHolding) {
+            isHolding = false;
+            startTime = Time.time;
+            player.RB.drag = playerData.drag;
+            player.SetVelocity(playerData.dashVelocity, dashDirection);
+            PlaceAfterImage();
+        } else {
+            player.SetVelocity(playerData.dashVelocity, dashDirection);
+            CheckIfShouldPlaceAfterImage();
+
+            if (Time.time >= startTime + playerData.dashTime) {
+                player.RB.drag = 0;
+                isAbilityDone = true;
+                lastDashTime = Time.time;
+                if (player.CurrentVelocity.y > 0) { player.SetVelocityY(player.CurrentVelocity.y * playerData.dashEndYMultiplier); }
+            }
+        }
+        
+    }
+
+    private void DashWithHeldSlow() {
         if (isHolding) {
             dashDirectionInput = player.InputHandler.RawDashDirectionInput;
             dashInputStop = player.InputHandler.DashInputStop;
@@ -65,21 +116,4 @@ public class PlayerDashState : PlayerAbilityState
             }
         }
     }
-    
-    private void CheckIfShouldPlaceAfterImage() {
-        if (Vector2.Distance(player.transform.position, lastAIPos) >= playerData.distBetweenAfterImage) {
-            PlaceAfterImage();
-        }
-    }
-
-    private void PlaceAfterImage() {
-        PlayerAfterImagePool.Instance.GetFromPool();
-        lastAIPos = player.transform.position;
-    }
-
-    public bool CheckIfCanDash() {
-        return CanDash && Time.time >= lastDashTime + playerData.dashCooldown;
-    }
-    
-    public void ResetCanDash() => CanDash = true;
 }

@@ -56,13 +56,15 @@ public class PlayerInAirState : PlayerState
     }
 
     private void CheckJumpMultipler() {
-        if (isJumping) {
-            if (jumpInputStop) {
-                player.SetVelocityY(player.CurrentVelocity.y * playerData.variableJumpHeightMultiplier);
-                isJumping = false;
-            } else if (player.CurrentVelocity.y <= 0) {
-                isJumping = false;
-            }
+        if (!isJumping) {
+            return;
+        }
+        
+        if (jumpInputStop) {
+            player.SetVelocityY(player.CurrentVelocity.y * playerData.variableJumpHeightMultiplier);
+            isJumping = false;
+        } else if (player.CurrentVelocity.y <= 0) {
+            isJumping = false;
         }
     }
 
