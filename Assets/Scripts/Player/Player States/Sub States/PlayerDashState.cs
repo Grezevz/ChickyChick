@@ -48,7 +48,9 @@ public class PlayerDashState : PlayerAbilityState
     }
 
     public bool CheckIfCanDash() {
-        return CanDash && Time.time >= lastDashTime + playerData.dashCooldown;
+        if (playerData.CanDash == true) { 
+            return CanDash && Time.time >= lastDashTime + playerData.dashCooldown;
+        }
     }
     
     public void ResetCanDash() => CanDash = true;
